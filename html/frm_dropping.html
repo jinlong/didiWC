@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>选择坑型</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fonts/css/font-awesome.min.css" />
+	<style>
+		#main ul li{
+			overflow: hidden; padding: 10px 0; border-bottom: 1px solid #f4f4f4;
+			display: -webkit-box;
+		    display: -webkit-flex;
+		    display: flex;
+		    -webkit-box-orient: horizontal;
+            -webkit-flex-flow: row;
+                   flex-flow: row;
+		}
+		#main ul li:nth-child(even){
+			background-color: #f5f5f5;
+		}
+		#main .pic{
+			width: 100px;
+		}
+		#main .pic img{
+			border-radius: 80px; width: 80px; height: 80px;
+			border:2px solid #ffa31a; display: block;
+			margin: 0 auto;
+		}
+		#main .con{
+			-webkit-box-flex: 1; 
+            -webkit-flex: 1;
+            flex: 1;
+            font-size: 14px;
+		}
+		#main .con h2{
+			color: #3a3a3a; font-size: 18px;
+		}
+		#main .comment{
+			color: #19ad00;
+		}
+		#main .con .up{
+			margin: 10px 0;
+		}
+		#main .con .dis{
+			background-color: #96d376; color: #fff; padding: 4px 8px;
+			border-radius: 10px;
+		}
+		#main .con .time{
+			background-color: #aaa; color: #fff; padding: 4px 8px;
+			border-radius: 10px;
+		}
+		#main .con i{
+			margin-right: 4px;
+		}
+		#main .price{
+			width: 60px; line-height: 84px; font-size: 20px; color: #7c7c7c;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt.jpg" />
+				</div>
+				<div class="con">
+					<h2>豪华坐便器</h2>
+					<div class="up">
+						<span>100%好评</span>
+						<span class="comment">有厕纸 有WIFI 有充电器</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>1.2公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>5分钟</span>
+					</div>
+				</div>
+				<div class="price">10元</div>
+			</li>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt1.jpg" />
+				</div>
+				<div class="con">
+					<h2>卫生蹲坑</h2>
+					<div class="up">
+						<span>96%好评</span>
+						<span class="comment">有厕纸 有WIFI</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>2.2公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>5分钟</span>
+					</div>
+				</div>
+				<div class="price">5元</div>
+			</li>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt3.jpg" />
+				</div>
+				<div class="con">
+					<h2>实惠尿壶</h2>
+					<div class="up">
+						<span>98%好评</span>
+						<span class="comment">有厕纸</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>2.7公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>7分钟</span>
+					</div>
+				</div>
+				<div class="price">2元</div>
+			</li>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt2.jpg" />
+				</div>
+				<div class="con">
+					<h2>商务蹲坑</h2>
+					<div class="up">
+						<span>100%好评</span>
+						<span class="comment">有厕纸 有充电器</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>1.6公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>7分钟</span>
+					</div>
+				</div>
+				<div class="price">8元</div>
+			</li>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt.jpg" />
+				</div>
+				<div class="con">
+					<h2>豪华坐便器</h2>
+					<div class="up">
+						<span>暂无评价</span>
+						<span class="comment">帮擦 有WIFI 有充电器</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>1.5公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>5分钟</span>
+					</div>
+				</div>
+				<div class="price">10元</div>
+			</li>
+			<li>
+				<div class="pic">
+					<img src="../image/mt/mt2.jpg" />
+				</div>
+				<div class="con">
+					<h2>卫生蹲坑</h2>
+					<div class="up">
+						<span>90%好评</span>
+						<span class="comment">有厕纸</span>
+					</div>
+					<div>
+						<span class="dis"><i class="fa fa-location-arrow"></i>1.8公里</span>
+						<span class="time"><i class="fa fa-clock-o"></i>20分钟</span>
+					</div>
+				</div>
+				<div class="price">5元</div>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+	apiready = function(){
+		
+	}
+</script>
+</html>

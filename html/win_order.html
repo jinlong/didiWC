@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>预约拉屎</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fonts/css/font-awesome.min.css" />
+	<style>
+		html,body{height: 100%;}
+		body{
+			background-color: #f0f0f0;
+		}
+		#header{
+			text-align: center; background-color: #f5f5f5; 
+			width: 100%; border-bottom: 1px solid #e5e5e5;
+		}
+		#header h1{
+		    position: relative;
+		    font-size: 20px; height: 44px; line-height: 44px; margin: 0em; 
+		}
+		#header .cancel{
+			position: absolute; left: 10px; bottom: 0; width: 44px; height: 44px;
+			font-size: 26px;
+			
+		}
+		#header .cancel i{
+			border:1px solid #e0e0e0; color: #8c8c8c; width: 30px; height: 30px;
+			border-radius: 30px; line-height: 30px; text-align: center; 
+		}
+		#header .cancel i.active{
+			background-color: #e6e6e6;
+		}
+		#main{
+			padding: 40px;
+		}
+		.order{
+			text-align: center; padding: 20px 0; border: 1px solid #dbdbdb;
+			border-radius: 6px; background-color: #fff; color: #abaaaa;
+		}
+		.order i{
+			color: #ff8903; font-size: 18px;
+		}
+		.order.active, .loc .active{
+			background-color: #eee;
+		}
+		.loc{
+			display: table; margin-top: 40px; width: 100%;
+			border: 1px solid #dbdbdb; border-radius: 6px; background-color: #fff;
+		}
+		.city{
+			display: table-cell; width: 20%; color: #ff8b01; vertical-align: middle;
+			border-right: 1px solid #d9d9d9; text-align: center;
+		}
+		.when{
+			display: table-cell;
+		}
+		.when span{color: #abaaaa;}
+		.when div{
+			padding:20px;
+		}
+		.when i{
+			font-size: 18px;
+		}
+		.when1{
+			border-bottom: 1px solid #d9d9d9;
+		}
+		.when1 i{
+			color: #52b786; 
+		}
+		.where i{
+			color: #e37479;
+		}
+		.btns{
+			margin-top: 40px; text-align: center;
+		}
+		.comment{
+			display: inline-block; width: 80px; height: 80px; border-radius: 80px;
+			border: 1px solid #dbdbdb; background-color: #fff;
+			text-align: center; color: #6e6e6e; font-size: 14px;
+		}
+		.comment.active{
+			border: 1px solid #ff8b03; color: #ff8b03;
+		}
+		.comment i{
+			color: #ff8903; font-size: 18px; display: block; margin-top: 20px;
+			margin-bottom: 4px;
+		}
+		.ok{
+			display: block; width: 100%; background-color: #ff8c03;
+			border-radius: 6px; color: #fff; margin-top: 20px;
+			padding: 14px 0; outline: none;
+		}
+		.ok.active{
+			background-color: #f07800;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h1>
+		<span class="cancel" tapmode="active" onclick="api.closeWin();">
+			<i class="fa fa-angle-left"></i>
+		</span>
+		预约拉屎
+		</h1>
+	</div>
+	<div id="main">
+		<div class="order" tapmode="active">
+			<i class="fa fa-clock-o"></i>
+			预约拉屎
+		</div>
+		<div class="loc">
+			<div class="city" tapmode="active">北京</div>
+			<div class="when">
+				<div class="when1" tapmode="active">
+					<i class="fa fa-map-marker"></i>
+					<span>什么时候拉屎</span>
+				</div>
+				<div class="where" tapmode="active">
+					<i class="fa fa-map-marker"></i>
+					<span>去哪里拉屎</span>
+				</div>
+			</div>
+		</div>
+		<div class="btns">
+			<div class="comment" tapmode="active">
+				<i class="fa fa-list-alt"></i>
+				捎话
+			</div>
+			<button class="ok" tapmode="active">确认发送</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script>
+
+	apiready = function(){
+		var header = $api.byId('header');
+        $api.fixIos7Bar(header); 
+	};
+</script>
+</html>

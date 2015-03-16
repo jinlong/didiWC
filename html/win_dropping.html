@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>选择坑型</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fonts/css/font-awesome.min.css" />
+	<style>
+		#header{
+			text-align: center; background-color: #fefefe; 
+			width: 100%; border-bottom: 1px solid #bbb;
+		}
+		#header h1{
+		    position: relative;
+		    font-size: 20px; height: 44px; line-height: 44px; margin: 0em; 
+		}
+		#header .cancel{
+			position: absolute; left: 14px; bottom: 0; 
+		}
+		#header .fa-map-marker{
+			position: absolute; right: 14px; bottom: 12px;
+		}
+		#filter{
+			border-top: 1px solid #bbb; 
+			display: -webkit-box;
+		    display: -webkit-flex;
+		    display: flex;
+		    -webkit-box-orient: horizontal;
+            -webkit-flex-flow: row;
+                   flex-flow: row;
+		}
+		#filter span{
+			display:inline-block; height: 40px; line-height: 40px; text-align: center;
+			overflow: hidden;
+			-webkit-box-flex: 1; 
+            -webkit-flex: 1;
+            flex: 1;
+		}
+		#filter span:after{
+			border-right: 1px solid #c3c3c3; float: right; margin-top: 8px;
+			content: ''; vertical-align: middle;
+			display: inline-block; width: 1px; height: 60%; margin-left: 4px;
+		}
+		#filter span:last-child:after{
+			border-right: none;
+		}
+		#filter .active{
+			color: #f9920b;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h1>
+		<span class="cancel" tapmode onclick="api.closeWin();">取消</span>
+		选择坑型
+		<i class="fa fa-map-marker"></i>
+		</h1>
+		<div id="filter">
+			<span tapmode onclick="filter();">
+				<i class="active fa fa-sort-amount-asc"></i>
+				智能排序
+			</span>
+			<span tapmode onclick="filter();">
+				<i class="fa fa-bicycle"></i>
+				距离
+			</span>
+			<span tapmode onclick="filter();">
+				<i class="fa fa-thumbs-o-up"></i>
+				好评率
+			</span>
+			<span tapmode onclick="filter();">
+				<i class="fa fa-cny"></i>
+				价格
+			</span>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script>
+	function filter(){
+		$('#filter .active').removeClass('active');
+		$(event.target).find('i').addClass('active');
+		
+		api.openFrame({
+	        name: 'frm_dropping'
+        });
+	}
+	apiready = function(){
+		var header = $api.byId('header');
+        $api.fixIos7Bar(header); 
+        var headerPos = $api.offset(header);
+		api.openFrame({
+	        name: 'frm_dropping',
+	        url: 'frm_dropping.html',
+	        rect: {
+		        x:0,
+		        y:headerPos.h,
+		        w:'auto',
+		        h:'auto'
+	        }
+        });
+	}
+</script>
+</html>

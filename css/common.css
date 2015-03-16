@@ -1,0 +1,38 @@
+html,body{
+	height: 100%;
+	width:100%;
+}
+#wrap{
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-flex-flow: column;
+           flex-flow: column;
+}
+#header{
+    text-align: center; background-color: #f5f5f5; color: #fff;
+    width: 100%; border-bottom: 1px solid #e5e5e5;
+}
+#header h1{
+    position: relative;
+    text-indent: -9999px;
+    font-size: 20px; height: 44px; line-height: 44px; margin: 0em; 
+    background:url(../image/logo.png) no-repeat center;
+    -webkit-background-size: 140px 28px;
+    background-size:  140px 28px;
+}
+#header .logo{
+    position: absolute; left: 14px; bottom: 7px; 
+    background: url(../image/user.png) no-repeat center;
+    width: 30px; height: 30px; 
+    -webkit-background-size: contain;
+    background-size:  contain;
+}
+#main{
+    -webkit-box-flex: 1; 
+    -webkit-flex: 1;
+    flex: 1;
+    padding: 2em;
+}

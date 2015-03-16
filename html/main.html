@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+	</style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	var bMap;
+	
+	//设置气泡样式
+	// function setBubbleStyle(id){
+	// 	if(!id){return;}
+	// 	bMap.setBubbleStyle({
+	// 	    bubbleBgimg: 'widget://image/buble.png',
+	// 	    imgPath: 'widget://image/usr.png',
+	// 	    id: id
+	// 	});
+	// }
+
+	function openToilet(){
+		setTimeout(function(){
+			api.openWin({
+	            name: 'win_toilet',
+	            url: './win_toilet.html',
+	            opaque: true,
+	            animation: {
+	                type: 'fade'
+	            }
+	        });
+		},500);
+	}
+	
+	//1:坐便式，2:蹲坑式
+	var toilet1 = [], toilet2 = [];
+	//id存起来
+	var annoId1 = [], annoId2 = [];
+	
+	function addAnnotation(annoArr, type){
+
+		for(var i=0, len=annoArr.length; i<len; i++){
+    		var curAnno = annoArr[i];
+
+    		if(curAnno.title.indexOf('公共厕所') > -1 || curAnno.title.indexOf('公厕') > -1){
+    			toilet2.push(curAnno);
+    			annoId2.push(curAnno.id);
+			}else{
+				toilet1.push(curAnno);
+				annoId1.push(curAnno.id);
+			}
+    	}
+
+    	if(type == '1'){
+    		bMap.addAnnotations({
+			    annoArray: toilet1,
+			    pinImg: 'widget://image/toilet1.png'
+			},function(ret,err){
+				if(ret){
+					// alert(JSON.stringify(ret));
+
+					// var bubbleId = ret.pinId;
+					// setBubbleStyle(bubbleId);
+
+					openToilet();
+
+				}else{
+					// alert(JSON.stringify(err));
+				}
+			});
+    	}else if(type == '2'){
+    		bMap.addAnnotations({
+			    annoArray: toilet2,
+			    pinImg: 'widget://image/toilet2.png'
+			},function(ret,err){
+				if(ret){
+					// alert(JSON.stringify(ret));
+
+					// var bubbleId = ret.pinId;
+					// setBubbleStyle(bubbleId);
+
+					openToilet();
+
+				}else{
+					// alert(JSON.stringify(err));
+				}
+			});
+    	}
+
+	}
+	//更新标注
+	function updateAnnotation(type){
+		if(type == '1'){
+			bMap.removeAnnotations({
+				idArray: annoId2
+			});
+    		bMap.addAnnotations({
+			    annoArray: toilet1,
+			    pinImg: 'widget://image/toilet1.png'
+			},function(ret,err){
+				if(ret){
+					// alert(JSON.stringify(ret));
+
+					// var bubbleId = ret.pinId;
+					// setBubbleStyle(bubbleId);
+
+					openToilet();
+
+				}else{
+					// alert(JSON.stringify(err));
+				}
+			});
+    	}else if(type == '2'){
+    		bMap.removeAnnotations({
+				idArray: annoId1
+			});
+    		bMap.addAnnotations({
+			    annoArray: toilet2,
+			    pinImg: 'widget://image/toilet2.png'
+			},function(ret,err){
+				if(ret){
+					// alert(JSON.stringify(ret));
+
+					// var bubbleId = ret.pinId;
+					// setBubbleStyle(bubbleId);
+
+					openToilet();
+
+				}else{
+					// alert(JSON.stringify(err));
+				}
+			});
+    	}
+	}
+
+	function searchNearBy(lon, lat, type){
+		// alert('lon:'+ lon +'_lat:'+ lat);
+
+		//找厕所
+    	bMap.searchNearBy({
+		    key:'厕所',
+		    lon: lon,
+		    lat: lat,
+		    radius: 1000
+		},function(ret,err){
+ 		// alert(JSON.stringify(ret));
+
+		    if (ret.status){
+		    	// var total = ret.totalNum;
+		    	// var curNum = ret.curNum;
+		    	var resArr = ret.resultArray;
+
+		    	var annoArr = [];
+		    	var i = 0, len = resArr.length;
+		    	var item;
+		    	for(i; i<len; i++){
+		    		item = resArr[i];
+		    		if(api.systemType == 'android'){
+		    			annoArr.push({
+			    			id: i,
+			    			lon: item.lon*0.000001,
+			    			lat: item.lat*0.000001,
+			    			title: item.name,
+			    			subTitle: item.add
+			    		});
+		    		}else{
+		    			annoArr.push({
+			    			id: i,
+			    			lon: item.lon,
+			    			lat: item.lat,
+			    			title: item.name,
+			    			subTitle: item.add
+			    		});
+		    		}
+		    		
+		    	}
+
+		    	// alert(JSON.stringify(annoArr));
+
+		    	addAnnotation(annoArr, type);
+
+		    } else{
+		        api.alert({title:'厕所去哪了', msg:err.msg});
+		    }
+		});
+	}
+
+	function init(type){
+		type = type || 1;
+
+    	// if(bMap){
+    	// 	bMap.close();
+    	// 	bMap = null;
+    	// }
+
+		bMap = api.require('baiduMap');
+		var y = api.pageParam.headerH;
+
+		//打开地图
+		bMap.open({
+		    x: 0,
+		    y: y,
+		    w: api.frameWidth,
+		    h: api.frameHeight
+		},function(ret,err){
+		    if(ret){
+		    	// alert(JSON.stringify(ret));
+
+		    	bMap.showUserLocation({
+				    isShow:true,
+				    trackingMode:'none'
+				});
+
+		    	//定位
+		    	bMap.startLocation({
+				    accuracy: '100m',
+				    filter:1,
+				    autoStop: true
+				},function(ret, err){
+					if(ret){
+						// alert(JSON.stringify(ret));
+
+						var sta = ret.status;
+					    var lat = ret.lat;
+					    var lon = ret.lon;
+					    var t = ret.timestamp;
+
+						setTimeout(function(){
+							bMap.setZoomLevel({
+							    level: 16
+							});
+						},300);
+
+					    //定位中心
+					    bMap.setCenter({
+						    lon: lon,
+						    lat: lat
+						});
+
+					    if(sta){
+					    	searchNearBy(lon, lat, type);
+					    } else{
+					        api.alert({title:'百度找不到你', msg:err.msg});
+					    }
+					}else{
+						// alert(JSON.stringify(err));
+					}
+				    
+				});
+
+		    }else{
+		    	// alert(JSON.stringify(err));
+		    }
+		});
+	}
+
+    apiready = function(){
+		init(2);
+    };
+</script>
+</html>

@@ -1,0 +1,32 @@
+ <widget id="A0000000000001"  version="0.0.1">
+    <name>didiShit</name>
+    <description>
+        didiShit by APICloud.
+    </description>
+    <author email="Alon@apicloud.com" href="http://www.apicloud.com">
+        Alon Zhang
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="pageBounce" value="false"/>
+	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+	<preference name="hScrollBarEnabled" value="true"/>
+	<preference name="vScrollBarEnabled" value="true"/>
+	<preference name="autoLaunch" value="true"/>
+	<preference name="autoUpdate" value="true" />
+	<preference name="smartUpdate" value="false" />
+	<preference name="debug" value="false"/>
+	<preference name="iOS7StatusBarAppearance" value="true"/>
+	<permission name="readPhoneState" />
+    <permission name="call" />
+	<permission name="camera" />
+	<permission name="record" />
+	<permission name="location" />
+	<permission name="internet" />
+    <feature name="baiduMap">
+        <param name="android_api_key" value="z6dHqvtKzGhUehlPkOHy4rWX" />
+    <param name="ios_api_key" value="seqkIEsmRiGH835067yBlzOy" />
+    </feature>
+</widget>

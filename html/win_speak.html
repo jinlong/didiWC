@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>语音</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fonts/css/font-awesome.min.css" />
+	<style>
+		html,body{height: 100%; background: transparent;}
+		body{
+			background-color: rgba(255,255,255,1);
+		}
+		#header h1{
+			padding: 60px 0 20px; font-size: 20px; text-align: center;
+		}
+		#main{
+			margin-top: 80px;
+		}
+		.microphone{
+			text-align: center; font-size: 60px; position: relative;
+		}
+		.microphone i{
+			color: #ff8c03; background-color: #efd4b3; width: 100px; height: 100px;
+			border-radius: 100px; border: 1px solid #f3cb8e; line-height: 100px;
+		}
+		@-webkit-keyframes  ripple{
+			0% {
+				-webkit-transform: scale(1);
+				        transform: scale(1);
+				opacity: 1;
+			}
+			100% {
+				-webkit-transform: scale(3);
+				        transform: scale(3);
+				opacity: 0;
+			}
+		}
+		@keyframes  ripple{
+			0% {
+				-webkit-transform: scale(1);
+				        transform: scale(1);
+				opacity: 1;
+			}
+			100% {
+				-webkit-transform: scale(3);
+				        transform: scale(3);
+				opacity: 0;
+			}
+		}
+		.wave{
+			position: absolute; margin: auto; left: 0; right: 0;
+			width: 100px; height: 100px;
+			border-radius: 100px;
+			display: inline-block; border: 1px solid #f3cb8e; 
+		}
+		.ripple{
+			-webkit-animation: ripple 1s infinite;
+			        animation: ripple 1s infinite;
+		}
+		#words{
+			width: 80%; height: 100px; overflow: auto;
+			margin: 40px auto;
+		}
+		.ok{
+			display: block; width: 80%; background-color: #ff8c03;
+			border-radius: 6px; color: #fff; margin: 0 auto;
+			padding: 14px 0; outline: none;
+		}
+		.ok.active{
+			background-color: #f07800;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h1>
+		说吧，随便聊点什么
+		</h1>
+	</div>
+	<div id="main">
+		<div class="microphone">
+			<i class="fa fa-microphone"></i>
+			<span class="wave ripple"></span>
+		</div>
+		<div id="words">
+			
+		</div>
+		<button class="ok" tapmode="active" onclick="speakOver()">说完了</button>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script>
+	function speakOver(){
+		var obj = api.require('speechRecognizer');
+		obj.stopRecord();
+		api.toast({
+		    msg: '好吧，不聊了',
+		    duration:1000,
+		    location: 'middle'
+		});
+		$('.wave').removeClass('ripple');
+		if(api.systemType == 'ios'){
+			setTimeout(function(){
+				api.closeWin();
+			},1000);
+		}
+			
+	}
+	apiready = function(){
+		var header = $api.byId('header');
+        $api.fixIos7Bar(header); 
+
+        var obj = api.require('speechRecognizer');
+		obj.record({
+		},function(ret,err){
+		    if(ret.status && ret.wordStr){
+		    	$('#words').append('<div>'+ ret.wordStr +'</div>');
+		    }else{
+		        // alert(err.msg);
+		    }
+		});
+	};
+</script>
+</html>
