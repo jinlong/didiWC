@@ -8,8 +8,8 @@
 
 #APP二维码
 
-[iOS 平台](https://github.com/jinlong/didiShit/blob/master/didiShit-and.png) 
-[Android 平台](https://github.com/jinlong/didiShit/blob/master/didiShit-ios.png)
+[iOS 平台](https://github.com/jinlong/didiShit/blob/master/didiShit-ios.png) 
+[Android 平台](https://github.com/jinlong/didiShit/blob/master/didiShit-and.png)
 
 
 
