@@ -76,7 +76,7 @@
 <body>
     <div id="wrap">
         <div id="header">
-            <h1><div class="logo"></div>didiShit</h1>
+            <h1><div class="logo" tapmode="" onclick="openSideNav();"></div>didiShit</h1>
         </div>
         <div id="main">
                 
@@ -97,6 +97,35 @@
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript" src="./script/zepto.js"></script>
 <script type="text/javascript">
+    var sideNavOpened = false;
+    function closeSideNav(){
+        if(sideNavOpened){
+            api.closeFrame({name: 'frm_nav'});
+            sideNavOpened = false;
+        }
+    }
+    function openSideNav(){
+        if(!sideNavOpened){
+            api.openFrame({
+                name: 'frm_nav',
+                opaque: false,
+                bounces: false,
+                bgColor: 'rgba(0,0,0,0.6)',
+                url: './html/frm_nav.html',
+                rect: {
+                    x: 0,
+                    y: 0,
+                    w: 'auto',
+                    h: 'auto'
+                }
+            });
+            sideNavOpened = true;
+        }else{
+            closeSideNav();
+        }
+        
+    }
+
     function switchIt(type){
         api.execScript({
             frameName: 'main',
@@ -142,6 +171,12 @@
     apiready = function(){
         api.setStatusBarStyle({
             style: 'dark'
+        });
+
+        api.addEventListener('keyback',function(){
+            if(sideNavOpened){
+                closeSideNav();
+            }
         });
 
         var header = $api.byId('header');

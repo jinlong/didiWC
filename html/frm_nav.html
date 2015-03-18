@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>侧边导航</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,body{
+            height: 100%; background-color: transparent;
+        }
+        .bb {border-bottom: 1px solid #D9D9D9;}
+        .fix-wrap {
+            -webkit-transition: all .1s ease-in;
+                    transition: all .1s ease-in;
+            -webkit-transform: translateX(-100%);
+                    transform: translateX(-100%);
+            margin-right: 60px;height: 100%;
+            background-color: #fff;
+        }
+        .fix-wrap.in{
+            -webkit-transform: translateX(0%);
+                    transform: translateX(0%);
+        }
+        .fix-wrap .logo-section {}
+        .fix-wrap .logo-section img {height: 60px; margin: 20px 10px; vertical-align: top;}
+        .fix-wrap .logo-section .user-info {position: absolute; left: 90px; top: 34px;}
+        .fix-wrap .logo-section .user-info div {font-size: 14px;}
+        
+        .fix-wrap .tool-section {margin-top: 20px;}
+        .fix-wrap .tool-section .tool {height: 50px;line-height: 50px;}
+        .fix-wrap .tool-section .tool .text {margin-left: 10px;color: #666;}
+        .fix-wrap .tool-section .tool .fix-ico {height: 24px; margin-top: 12px; margin-left: 30px;vertical-align: top;}
+        
+        .fix-wrap .tool-hover {background-color: #F0F0F0;}
+
+    </style>
+</head>
+<body>
+    <div class="fix-wrap">
+        <!-- logo -->
+        <div class="logo-section" id="logo-section">
+            <img src="../image/fix/menu_icn_head.png" alt="">
+            <div class="user-info" id="user-info">
+                <div class="user-phone">187****8888</div>
+                <div class="user-level">普通会员</div>
+            </div>
+        </div>
+
+        <!-- 功能条 -->
+        <div class="tool-section">
+            <div class="tool" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_order.png" alt="" class="fix-ico"><span class="text">我的行程</span>
+            </div>
+            <div class="tool" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_wallet.png" alt="" class="fix-ico"><span class="text">我的钱包</span>
+            </div>
+            <div class="tool bb" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_message.png" alt="" class="fix-ico"><span class="text">消息中心</span>
+            </div>
+            <div class="tool" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_mall.png" alt="" class="fix-ico"><span class="text">积分商城</span>
+            </div>
+            <div class="tool bb" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_invitation.png" alt="" class="fix-ico"><span class="text">推荐有奖</span>
+            </div>
+            <div class="tool" tapmode="tool-hover" onclick="">
+                <img src="../image/fix/menu_icn_setting.png" alt="" class="fix-ico"><span class="text">设置</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script type="text/javascript">
+	
+	$(document.body).on('touchend',function(e){
+           var wrap = $api.dom('.fix-wrap');
+           if(!$.contains(wrap, e.target)){
+               api.execScript({
+                   name: 'root',
+                   script: 'closeSideNav()'
+               });
+           }
+    });
+	
+    apiready = function(){
+        var header = $api.byId('logo-section');
+        var header2 = $api.byId('user-info');
+        $api.fixIos7Bar(header); 
+        $api.fixIos7Bar(header2); 
+
+        var wrap = $api.dom('.fix-wrap');
+        $api.addCls(wrap, 'in');
+	    
+    };
+
+</script>
+</html>

@@ -27,6 +27,6 @@
 	<permission name="internet" />
     <feature name="baiduMap">
         <param name="android_api_key" value="z6dHqvtKzGhUehlPkOHy4rWX" />
-    <param name="ios_api_key" value="seqkIEsmRiGH835067yBlzOy" />
+        <param name="ios_api_key" value="seqkIEsmRiGH835067yBlzOy" />
     </feature>
 </widget>
