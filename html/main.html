@@ -161,24 +161,13 @@
 		    	var item;
 		    	for(i; i<len; i++){
 		    		item = resArr[i];
-		    		if(api.systemType == 'android'){
-		    			annoArr.push({
-			    			id: i,
-			    			lon: item.lon*0.000001,
-			    			lat: item.lat*0.000001,
-			    			title: item.name,
-			    			subTitle: item.add
-			    		});
-		    		}else{
-		    			annoArr.push({
-			    			id: i,
-			    			lon: item.lon,
-			    			lat: item.lat,
-			    			title: item.name,
-			    			subTitle: item.add
-			    		});
-		    		}
-		    		
+	    			annoArr.push({
+		    			id: i,
+		    			lon: item.lon,
+		    			lat: item.lat,
+		    			title: item.name,
+		    			subTitle: item.add
+		    		});
 		    	}
 
 		    	// alert(JSON.stringify(annoArr));
