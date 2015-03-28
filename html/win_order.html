@@ -107,18 +107,18 @@
 		</h1>
 	</div>
 	<div id="main">
-		<div class="order" tapmode="active">
+		<div class="order" tapmode="active" onclick="orderDropping();">
 			<i class="fa fa-clock-o"></i>
 			预约拉屎
 		</div>
 		<div class="loc">
-			<div class="city" tapmode="active">北京</div>
+			<div class="city" tapmode="active" onclick="selectCity();">北京</div>
 			<div class="when">
-				<div class="when1" tapmode="active">
+				<div class="when1" tapmode="active" onclick="search(this);">
 					<i class="fa fa-map-marker"></i>
-					<span>什么时候拉屎</span>
+					<span>从哪里出发</span>
 				</div>
-				<div class="where" tapmode="active">
+				<div class="where" tapmode="active" onclick="search(this);">
 					<i class="fa fa-map-marker"></i>
 					<span>去哪里拉屎</span>
 				</div>
@@ -136,7 +136,48 @@
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/zepto.js"></script>
 <script>
+	function orderDropping(){
+//		api.openFrame({
+//	        name: 'frm_time_selector',
+//	        url: 'frm_time_selector.html',
+//	        bounces: false,
+//	        opaque: false,
+//	        bgColor: 'rgba(0,0,0,0)',
+//	        rect: {
+//		        x: 0,
+//		        y: 0,
+//		        w: 'auto',
+//		        h: 'auto'
+//	        }
+//      });
+	}
 
+	function search(cur){
+		var obj = api.require('searchBar');
+		obj.open(function(ret,err){
+			if(ret){
+				if(ret.isRecord){
+			        // api.alert({msg:'点击了录音按钮'});
+			    }else{
+			    	$(cur).find('span').text(ret.text);
+			    }
+			}
+		});
+	}
+
+	function changeCity(city){
+		city = city || '北京';
+		$('.city').text(city);
+	}
+	function selectCity(){
+		api.openWin({
+	        name: 'win_city',
+	        url: 'win_city.html',
+	        animation: {
+	        	type: 'none'
+	        }
+        });
+	}
 	apiready = function(){
 		var header = $api.byId('header');
         $api.fixIos7Bar(header); 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>预约拉屎</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		html,body{
+			height: 100%; width: 100%; background: transparent;
+		}
+		body{position: relative;}
+		.header{
+			border-top: 2px solid #ff8903; height: 40px; line-height: 40px;
+			overflow: hidden; background-color: #f5f5f5;
+		}
+		.header span{
+			color: #fd9e34; padding: 0 20px; font-size: 14px;
+		}
+		.header span:first-child{
+			float: left;
+		}
+		.header span:last-child{
+			float: right;
+		}
+		#selector{
+			position: absolute; bottom: 0; width: 100%;
+			background-color: #fff;
+		}
+		.datetime{
+			height: 140px; overflow: auto;
+		}
+		.datetime ul{
+			line-height: 2;
+			text-align: center; height: 140px; overflow: auto;
+			position: absolute; z-index: 2; width: 33.33%;
+		}
+		.datetime ul:nth-child(2){
+			z-index: 3; left: 33.33%;
+		}
+		.datetime ul:nth-child(3){
+			z-index: 4; left: 66.66%;
+		}
+	</style>
+</head>
+<body>
+	<div id="selector">
+		<div class="header">
+			<span>取消</span><span>确定</span>
+		</div>
+		<div class="datetime">
+			<ul class="date">
+				<li>今天</li>
+				<li>明天</li>
+				<li>后天</li>
+			</ul>
+			<ul class="hour">
+				<li>0点</li>
+				<li>1点</li>
+				<li>2点</li>
+				<li>3点</li>
+				<li>4点</li>
+				<li>5点</li>
+				<li>6点</li>
+				<li>7点</li>
+				<li>8点</li>
+				<li>9点</li>
+				<li>10点</li>
+				<li>11点</li>
+				<li>12点</li>
+				<li>13点</li>
+				<li>14点</li>
+				<li>15点</li>
+				<li>16点</li>
+				<li>17点</li>
+				<li>18点</li>
+				<li>19点</li>
+				<li>20点</li>
+				<li>21点</li>
+				<li>22点</li>
+				<li>23点</li>
+			</ul>
+			<ul>
+				<li>0分</li>
+				<li>10分</li>
+				<li>20分</li>
+				<li>30分</li>
+				<li>40分</li>
+				<li>50分</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script>
+	apiready = function(){
+		
+	};
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>选择城市</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/fonts/css/font-awesome.min.css" />
+	<style>
+	</style>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+
+	apiready = function(){
+		var y = api.pageParam.headerH;
+		var obj = api.require('cityList');
+		obj.open({
+			y: y,
+			w: api.frameWidth,
+			h: api.frameHeight,
+		    currentCity:'北京',
+		    resource:'widget://res/cityList.json'
+		},function(ret,err){
+			if(ret){
+				// alert(JSON.stringify(ret));
+				
+				var city = ret.cityInfo.city;
+				api.execScript({
+					name: 'win_order',
+	                script: 'changeCity("'+ city +'");'
+                });
+                setTimeout(function(){
+					api.closeWin();
+                },200);
+			}
+		});
+	};
+</script>
+</html>
