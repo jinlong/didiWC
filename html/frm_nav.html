@@ -11,14 +11,15 @@
         }
         .bb {border-bottom: 1px solid #D9D9D9;}
         .fix-wrap {
-            -webkit-transition: all .1s ease-in;
-                    transition: all .1s ease-in;
+            position: relative;
+            -webkit-transition: all .3s linear;
+                    transition: all .3s linear;
             -webkit-transform: translateX(-100%);
                     transform: translateX(-100%);
             margin-right: 60px;height: 100%;
             background-color: #fff;
         }
-        .fix-wrap.in{
+        .in{
             -webkit-transform: translateX(0%);
                     transform: translateX(0%);
         }
@@ -37,7 +38,7 @@
     </style>
 </head>
 <body>
-    <div class="fix-wrap">
+    <div class="fix-wrap in">
         <!-- logo -->
         <div class="logo-section" id="logo-section">
             <img src="../image/fix/menu_icn_head.png" alt="">
@@ -72,17 +73,18 @@
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/zepto.js"></script>
+<script type="text/javascript" src="../script/hammer.js"></script>
 <script type="text/javascript">
 	
 	$(document.body).on('touchend',function(e){
-           var wrap = $api.dom('.fix-wrap');
-           if(!$.contains(wrap, e.target)){
-               api.execScript({
-                   name: 'root',
-                   script: 'closeSideNav()'
-               });
-           }
-    });
+        var wrap = $api.dom('.fix-wrap');
+        if(!$.contains(wrap, e.target)){
+            api.execScript({
+                name: 'root',
+                script: 'closeSideNav()'
+            });
+        }
+ });
 	
     apiready = function(){
         var header = $api.byId('logo-section');
@@ -93,6 +95,51 @@
         var wrap = $api.dom('.fix-wrap');
         $api.addCls(wrap, 'in');
 	    
+        $(wrap).on('webkitTransitionEnd, transitionend', function(){
+            
+        });
+
+        var hammertime = new Hammer(wrap, {
+            // threshold: 40
+        });
+        var navWidth = $(wrap).width();
+        var distance = 0;
+        hammertime.on('panleft', function(ev) {
+            distance = parseInt(ev.deltaX, 10);
+            $(wrap).css({
+                '-webkit-transition-timing-function': 'linear',
+                'transition-timing-function': 'linear',
+                '-webkit-transition-duration': '0s',
+                'transition-duration': '0s',
+                '-webkit-transform': 'translateX('+ distance +'px)',
+                'transform': 'translateX('+ distance +'px)'
+            });
+            // console.log(ev);
+        });
+        hammertime.on('panend', function(ev){
+            if(Math.abs(distance) <= navWidth/2){
+                $(wrap).css({
+                    '-webkit-transition-timing-function': 'ease-in',
+                    'transition-timing-function': 'ease-in',
+                    '-webkit-transform': 'translateX(0%)',
+                    'transform': 'translateX(0%)'
+                });
+            }else{
+                $(wrap).css({
+                    '-webkit-transition-timing-function': 'ease-out',
+                    'transition-timing-function': 'ease-out',
+                    '-webkit-transform': 'translateX(-100%)',
+                    'transform': 'translateX(-100%)'
+                });
+                setTimeout(function(){
+                    api.closeFrame({
+                        name: 'frm_nav'
+                    });
+                },100);
+                
+            }
+        });
+        
     };
 
 </script>
